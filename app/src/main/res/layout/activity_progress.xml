@@ -29,6 +29,7 @@
         android:layout_marginEnd="8dp"
         android:text="@string/making_pizza"
         android:textSize="18sp"
+        android:gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/finish_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

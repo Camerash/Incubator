@@ -63,7 +63,7 @@ class ProgressActivity : AppCompatActivity() {
         }
     }
     private fun checkState() {
-        if(MainActivity.service?.isConnected() == true) {
+        if(MainActivity.service?.isConnected() == true || MainActivity.debugMode) {
             makePizza()
         }
     }
