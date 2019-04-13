@@ -140,7 +140,7 @@ class MainActivity : AppCompatActivity(), ServiceConnection, PaymentBottomSheetF
 
     private fun unwindClamp() {
         if(service?.isConnected() == true) {
-            service?.sendString("Unwind")
+            service?.sendString("unwind")
         }
     }
 
