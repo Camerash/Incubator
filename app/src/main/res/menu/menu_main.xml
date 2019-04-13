@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <item
+        android:id="@+id/unwind_clamp"
+        android:icon="@drawable/ic_cached_black_24dp"
+        android:title="@string/unwind_clamp"
+        app:showAsAction="always"
+        tools:ignore="AlwaysShowAction" />
 
     <item
         android:id="@+id/debug"
         android:icon="@drawable/ic_bug_report_black_24dp"
-        android:title="@string/bluetooth_connection"
+        android:title="@string/debug_mode"
         app:showAsAction="always"
         tools:ignore="AlwaysShowAction" />
 

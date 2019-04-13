@@ -95,6 +95,7 @@ class MainActivity : AppCompatActivity(), ServiceConnection, PaymentBottomSheetF
         when(item.itemId) {
             R.id.bluetooth -> getBluetoothDeviceList()
             R.id.debug -> toggleDebugMode()
+            R.id.unwind_clamp -> unwindClamp()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -134,6 +135,12 @@ class MainActivity : AppCompatActivity(), ServiceConnection, PaymentBottomSheetF
         if(service?.isConnected() == true) {
             progressDialog.dismiss()
             mask.visibility = View.GONE
+        }
+    }
+
+    private fun unwindClamp() {
+        if(service?.isConnected() == true) {
+            service?.sendString("Unwind")
         }
     }
 

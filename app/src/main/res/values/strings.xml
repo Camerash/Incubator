@@ -2,6 +2,8 @@
     <string name="app_name">Incubator</string>
 
     <string name="bluetooth_connection">Connect to incubator</string>
+    <string name="debug_mode">Debug mode</string>
+    <string name="unwind_clamp">Unwind clamp</string>
     <string name="back">&lt; Back</string>
     <string name="next">Next &gt;</string>
 
