@@ -73,9 +73,11 @@ class ProgressActivity : AppCompatActivity() {
         made = true
         MainActivity.service?.sendString("1, 180, 1")
 
-        Handler().postDelayed({
-            handleMessage("")
-        }, 1000)
+        if(MainActivity.debugMode) {
+            Handler().postDelayed({
+                handleMessage("")
+            }, 1000)
+        }
     }
 
     private fun handleMessage(message: String) {

@@ -94,6 +94,7 @@ class MainActivity : AppCompatActivity(), ServiceConnection, PaymentBottomSheetF
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.bluetooth -> getBluetoothDeviceList()
+            R.id.debug -> toggleDebugMode()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -116,6 +117,16 @@ class MainActivity : AppCompatActivity(), ServiceConnection, PaymentBottomSheetF
                 Handler().postDelayed({ if(service?.isConnected() == false) handleConnectionFailed() }, 5000)
             }
             dialog.show()
+        }
+    }
+
+    private fun toggleDebugMode() {
+        debugMode = !debugMode
+        val title = getString(R.string.app_name) + if(debugMode) " (DEBUG)" else ""
+        setTitle(title)
+
+        if(debugMode) {
+            mask.visibility = View.GONE
         }
     }
 
@@ -157,6 +168,7 @@ class MainActivity : AppCompatActivity(), ServiceConnection, PaymentBottomSheetF
 
         val PIZZA_KEY = "Pizza"
         var service: BluetoothService? = null
+        var debugMode = false
     }
 
     inner class PizzaAdapter(private val pizzaList: List<Pizza>) :

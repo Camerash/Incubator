@@ -57,16 +57,16 @@ class ToppingPickerActivity : AppCompatActivity(), PaymentBottomSheetFragment.On
     companion object {
         val toppingList = listOf(
                 Topping(
-                        "Cheese",
-                        20,
-                        10,
-                        R.color.cheese
-                ),
-                Topping(
                         "Tomato sause",
                         20,
                         10,
                         R.color.tomato_sauce
+                ),
+                Topping(
+                        "Pineapple",
+                        20,
+                        10,
+                        R.color.pineapple
                 ),
                 Topping(
                         "Pepperoni",
@@ -87,10 +87,10 @@ class ToppingPickerActivity : AppCompatActivity(), PaymentBottomSheetFragment.On
                         R.color.green_pepper
                 ),
                 Topping(
-                        "Pineapple",
+                        "Cheese",
                         20,
                         10,
-                        R.color.pineapple
+                        R.color.cheese
                 )
         )
 

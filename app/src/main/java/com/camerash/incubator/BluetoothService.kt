@@ -39,7 +39,7 @@ class BluetoothService: Service() {
     fun isConnected(): Boolean = bt.state == Bluetooth.STATE_CONNECTED
 
     fun sendString(message: String) {
-        bt.sendMessage(message);
+        bt.sendMessage(message)
     }
 
     fun registerHandler(handler: Handler) {

@@ -13,7 +13,7 @@
         android:layout_gravity="center"
         android:layout_marginBottom="36dp"
         app:backgroundColor="@color/slider_background"
-        app:cornerRadius="16dp"
+        app:libCornerRadius="24"
         app:imageEnabled="false"
         app:textEnabled="false" />
 
