@@ -1,157 +1,313 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/root"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/drawable_rounded_corner">
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/order_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/summary"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="@color/translucent_text_gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/translucent_light_gray"
-        app:layout_constraintTop_toTopOf="@id/order_section"/>
-
-    <RelativeLayout
-        android:id="@+id/order_section"
+    <LinearLayout
+        android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:padding="24dp"
-        app:layout_constraintTop_toBottomOf="@id/order_title">
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/drawable_rounded_corner"
+        android:elevation="8dp">
 
         <TextView
-            android:id="@+id/order_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toStartOf="@id/pizza_image"
-            android:layout_alignTop="@id/pizza_image"
-            android:layout_alignBottom="@id/pizza_image"
-            android:gravity="center_vertical"
-            android:text="@string/order_label"/>
-
-        <ImageView
-            android:id="@+id/pizza_image"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_toStartOf="@id/pizza_info"/>
-
-        <TextView
-            android:id="@+id/pizza_info"
+            android:id="@+id/order_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@id/pizza_image"
-            android:layout_alignBottom="@id/pizza_image"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="16dp"
-            android:gravity="center_vertical"/>
+            android:layout_marginTop="16dp"
+            android:text="@string/summary"
+            android:textColor="@color/translucent_text_gray"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <View
-            android:id="@+id/separator"
-            android:layout_width="96dp"
-            android:layout_height="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
             android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_alignEnd="@id/pizza_info"
-            android:layout_below="@id/pizza_info"
-            android:background="@color/translucent_text_gray"/>
+            android:background="@color/translucent_light_gray" />
 
-        <TextView
-            android:id="@+id/order_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/translucent_text_gray"
-            android:layout_alignEnd="@id/pizza_info"
-            android:layout_marginTop="4dp"
-            android:layout_below="@id/separator"
-            android:text="HKD $100"/>
-
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/translucent_light_gray"
-        app:layout_constraintTop_toTopOf="@id/payment_section"/>
-
-    <RelativeLayout
-        android:id="@+id/payment_section"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="24dp"
-        app:layout_constraintTop_toBottomOf="@id/order_section">
-
-        <TextView
-            android:id="@+id/credit_card_label"
+        <RelativeLayout
+            android:id="@+id/order_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toStartOf="@id/credit_card_image"
-            android:text="@string/credit_card_label"/>
+            android:padding="24dp">
 
-        <ImageView
-            android:id="@+id/credit_card_image"
-            android:layout_width="36dp"
+            <TextView
+                android:id="@+id/order_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/pizza_image"
+                android:layout_alignBottom="@id/pizza_image"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@id/pizza_image"
+                android:gravity="center_vertical"
+                android:text="@string/order_label" />
+
+            <ImageView
+                android:id="@+id/pizza_image"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_toStartOf="@id/pizza_info" />
+
+            <TextView
+                android:id="@+id/pizza_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/pizza_image"
+                android:layout_alignBottom="@id/pizza_image"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="16dp"
+                android:gravity="center_vertical" />
+
+            <View
+                android:id="@+id/separator"
+                android:layout_width="96dp"
+                android:layout_height="2dp"
+                android:layout_below="@id/pizza_info"
+                android:layout_alignEnd="@id/pizza_info"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/translucent_text_gray" />
+
+            <TextView
+                android:id="@+id/order_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/separator"
+                android:layout_alignEnd="@id/pizza_info"
+                android:layout_marginTop="4dp"
+                android:text="@string/price_default"
+                android:textColor="@color/translucent_text_gray"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/translucent_light_gray" />
+
+        <com.github.florent37.expansionpanel.ExpansionHeader
+            android:id="@+id/payment_section"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toStartOf="@id/credit_card_no"
-            android:adjustViewBounds="true"
-            android:src="@drawable/visa"/>
+            app:expansion_headerIndicator="@id/expansion_indicator"
+            app:expansion_layout="@id/expansion_layout"
+            app:expansion_toggleOnClick="true">
 
-        <TextView
-            android:id="@+id/credit_card_no"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:padding="24dp">
+
+                <TextView
+                    android:id="@+id/credit_card_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@id/payment_icon"
+                    android:text="@string/credit_card_label" />
+
+                <ImageView
+                    android:id="@+id/payment_icon"
+                    android:layout_width="36dp"
+                    android:layout_height="24dp"
+                    android:layout_toStartOf="@id/payment_info"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/visa" />
+
+                <TextView
+                    android:id="@+id/payment_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_toStartOf="@id/expansion_indicator"
+                    android:text="@string/visa_info" />
+
+                <ImageView
+                    android:id="@+id/expansion_indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="8dp"
+                    app:srcCompat="@drawable/ic_expansion_header_indicator_grey_24dp" />
+
+            </RelativeLayout>
+
+        </com.github.florent37.expansionpanel.ExpansionHeader>
+
+        <com.github.florent37.expansionpanel.ExpansionLayout
+            android:id="@+id/expansion_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/payment_section">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:elevation="0dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/translucent_light_gray" />
+
+                <RelativeLayout
+                    android:id="@+id/visa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:padding="24dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_toStartOf="@id/visa_icon"
+                        android:text="@string/visa" />
+
+                    <ImageView
+                        android:id="@+id/visa_icon"
+                        android:layout_width="36dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentEnd="true"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/visa" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/translucent_light_gray" />
+
+                <RelativeLayout
+                    android:id="@+id/mastercard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:padding="24dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_toStartOf="@id/mastercard_icon"
+                        android:text="@string/mastercard" />
+
+                    <ImageView
+                        android:id="@+id/mastercard_icon"
+                        android:layout_width="36dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentEnd="true"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/mastercard" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/translucent_light_gray" />
+
+                <RelativeLayout
+                    android:id="@+id/wechat_pay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:padding="24dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_toStartOf="@id/wechat_pay_icon"
+                        android:text="@string/wechat_pay" />
+
+                    <ImageView
+                        android:id="@+id/wechat_pay_icon"
+                        android:layout_width="36dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentEnd="true"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/wechat_pay" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/translucent_light_gray" />
+
+                <RelativeLayout
+                    android:id="@+id/alipay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:padding="24dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_toStartOf="@id/alipay_icon"
+                        android:text="@string/alipay" />
+
+                    <ImageView
+                        android:id="@+id/alipay_icon"
+                        android:layout_width="36dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentEnd="true"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/alipay" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </com.github.florent37.expansionpanel.ExpansionLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/translucent_light_gray" />
+
+        <com.ornach.nobobutton.NoboButton
+            android:id="@+id/order_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="16dp"
-            android:text="@string/credit_card_no"/>
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:paddingStart="36dp"
+            android:paddingEnd="36dp"
+            app:nb_backgroundColor="@color/pay_red"
+            app:nb_borderWidth="2dp"
+            app:nb_focusColor="@color/translucent_red"
+            app:nb_radius="8dp"
+            app:nb_text="@string/order"
+            app:nb_textColor="@android:color/white"
+            app:nb_textSize="18sp" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/translucent_light_gray"
-        app:layout_constraintBottom_toBottomOf="@id/payment_section" />
-
-    <com.ornach.nobobutton.NoboButton
-        android:id="@+id/order_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="24dp"
-        android:paddingStart="36dp"
-        android:paddingEnd="36dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/payment_section"
-        app:nb_backgroundColor="@color/pay_red"
-        app:nb_borderWidth="2dp"
-        app:nb_focusColor="@color/translucent_red"
-        app:nb_radius="8dp"
-        app:nb_text="@string/order"
-        app:nb_textColor="@android:color/white"
-        app:nb_textSize="18sp" />
-
-
-</android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>

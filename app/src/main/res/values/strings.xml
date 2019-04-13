@@ -18,10 +18,18 @@
 
     <string name="summary">Summary</string>
     <string name="credit_card_label">Payment</string>
-    <string name="credit_card_no">Ending in 4827</string>
 
     <string name="order_label">Order summary</string>
     <string name="pizza_quantity">%s x1</string>
     <string name="order_fragment">order_fragment</string>
     <string name="connection_failed">Unable to connect device</string>
+    <string name="price_default">HKD $100</string>
+
+    <string name="visa">VISA</string>
+    <string name="mastercard">Mastercard</string>
+    <string name="wechat_pay">WeChat Pay</string>
+    <string name="alipay">Alipay</string>
+
+    <string name="visa_info">Ending in 4827</string>
+    <string name="mastercard_info">Ending in 2392</string>
 </resources>

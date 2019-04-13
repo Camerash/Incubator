@@ -2,6 +2,8 @@ package com.camerash.incubator
 
 import android.os.Bundle
 import android.support.design.widget.BottomSheetDialogFragment
+import android.support.transition.AutoTransition
+import android.support.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,6 +37,19 @@ class PaymentBottomSheetFragment: BottomSheetDialogFragment() {
             if(act is OnPaymentCompleteListener)
                 act.onPaymentComplete(pizza)
         }
+
+        visa.setOnClickListener { updatePaymentInfo(R.drawable.visa, R.string.visa_info) }
+        mastercard.setOnClickListener { updatePaymentInfo(R.drawable.mastercard, R.string.mastercard_info) }
+        wechat_pay.setOnClickListener { updatePaymentInfo(R.drawable.wechat_pay, R.string.wechat_pay) }
+        alipay.setOnClickListener { updatePaymentInfo(R.drawable.alipay, R.string.alipay) }
+    }
+
+    private fun updatePaymentInfo(icon: Int, info: Int) {
+        TransitionManager.beginDelayedTransition(root, AutoTransition())
+
+        payment_icon.setImageResource(icon)
+        payment_info.setText(info)
+        expansion_layout.collapse(true)
     }
 
     interface OnPaymentCompleteListener {
