@@ -1,4 +1,4 @@
-package com.camerash.incubator
+package com.camerash.incubator.model
 
 /**
  * @author Camerash

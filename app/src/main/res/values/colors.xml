@@ -15,4 +15,6 @@
     <color name="pepperoni">#FF8888</color>
     <color name="cheese">#FFFFCC</color>
     <color name="tomato_sauce">#DD1111</color>
+
+    <color name="translucent_red">#66CC0000</color>
 </resources>

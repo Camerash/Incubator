@@ -9,6 +9,9 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import com.camerash.incubator.model.Topping
+import com.camerash.incubator.model.ToppingValue
+import com.camerash.incubator.view.BoxedVertical
 import kotlinx.android.synthetic.main.activity_topping_picker.*
 import kotlinx.android.synthetic.main.item_topping.view.*
 
@@ -33,42 +36,42 @@ class ToppingPickerActivity : AppCompatActivity() {
 
     companion object {
         val toppingList = listOf(
-            Topping(
-                "Cheese",
-                20,
-                10,
-                R.color.cheese
-            ),
-            Topping(
-                "Tomato sause",
-                20,
-                10,
-                R.color.tomato_sauce
-            ),
-            Topping(
-                "Pepperoni",
-                20,
-                10,
-                R.color.pepperoni
-            ),
-            Topping(
-                "Red Pepper",
-                20,
-                10,
-                R.color.red_pepper
-            ),
-            Topping(
-                "Green Pepper",
-                20,
-                10,
-                R.color.green_pepper
-            ),
-            Topping(
-                "Yellow Pepper",
-                20,
-                10,
-                R.color.yellow_pepper
-            )
+                Topping(
+                        "Cheese",
+                        20,
+                        10,
+                        R.color.cheese
+                ),
+                Topping(
+                        "Tomato sause",
+                        20,
+                        10,
+                        R.color.tomato_sauce
+                ),
+                Topping(
+                        "Pepperoni",
+                        20,
+                        10,
+                        R.color.pepperoni
+                ),
+                Topping(
+                        "Red Pepper",
+                        20,
+                        10,
+                        R.color.red_pepper
+                ),
+                Topping(
+                        "Green Pepper",
+                        20,
+                        10,
+                        R.color.green_pepper
+                ),
+                Topping(
+                        "Yellow Pepper",
+                        20,
+                        10,
+                        R.color.yellow_pepper
+                )
         )
     }
 

@@ -1,4 +1,4 @@
-package com.camerash.incubator
+package com.camerash.incubator.model
 
 import java.io.Serializable
 
