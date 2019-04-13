@@ -5,24 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <FrameLayout
-        android:id="@+id/pizza_stack"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/topping_recycler_view">
-
-        <ImageView
-            android:id="@+id/pizza_base"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"/>
-
-    </FrameLayout>
-
-    <RelativeLayout
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/topping_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_alignParentBottom="true"/>
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>

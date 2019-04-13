@@ -7,6 +7,7 @@ import java.io.Serializable
  */
 data class Topping(
     val name: String,
-    val pickerDrawRes: Int,
-    val pizzaTopDrawRes: Int
+    val maxAmount: Int,
+    val defaultAmount: Int,
+    val color: Int
 ): Serializable

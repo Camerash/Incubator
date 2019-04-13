@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BoxedVertical">
+    <attr format="integer" name="points"/>
+    <attr format="integer" name="max"/>
+    <attr format="integer" name="min"/>
+    <attr format="integer" name="defaultValue"/>
+    <attr format="integer" name="textBottomPadding"/>
+    <attr format="integer" name="libCornerRadius"/>
+    <attr format="integer" name="step"/>
+
+    <attr format="reference" name="defaultImage"/>
+    <attr format="reference" name="minImage"/>
+    <attr format="reference" name="maxImage"/>
+
+    <attr format="color" name="progressColor"/>
+    <attr format="color" name="backgroundColor"/>
+
+    <attr format="dimension" name="textSize"/>
+    <attr format="color" name="textColor"/>
+
+    <attr format="boolean" name="clockwise"/>
+    <attr format="boolean" name="enabled"/>
+    <attr format="boolean" name="touchDisabled"/>
+    <attr format="boolean" name="textEnabled"/>
+    <attr format="boolean" name="imageEnabled"/>
+
+</declare-styleable>
+</resources>

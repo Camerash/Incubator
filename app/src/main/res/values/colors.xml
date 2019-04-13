@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#0277BD</color>
-    <color name="colorPrimaryDark">#1565C0</color>
-    <color name="colorAccent">#00695C</color>
+    <color name="colorPrimary">#B71C1C</color>
+    <color name="colorPrimaryDark">#B71C1C</color>
+    <color name="colorAccent">#FF6F00</color>
+
+    <color name="color_background">#4b4b4b</color>
+    <color name="color_progress">#fbfbfb</color>
+    <color name="color_text">@android:color/black</color>
+
+    <color name="slider_background">#333333</color>
+    <color name="red_pepper">#CC3333</color>
+    <color name="green_pepper">#339933</color>
+    <color name="yellow_pepper">#FFFF60</color>
+    <color name="pepperoni">#FF8888</color>
+    <color name="cheese">#FFFFCC</color>
+    <color name="tomato_sauce">#DD1111</color>
 </resources>
