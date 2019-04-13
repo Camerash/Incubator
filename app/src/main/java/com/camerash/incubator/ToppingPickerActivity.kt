@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_topping_picker.*
 import kotlinx.android.synthetic.main.item_topping.view.*
 
 
-class ToppingPickerActivity : AppCompatActivity() {
+class ToppingPickerActivity : AppCompatActivity(), PaymentBottomSheetFragment.OnPaymentCompleteListener {
 
     private val pizza: Pizza by lazy { intent.getSerializableExtra(MainActivity.PIZZA_KEY) as Pizza }
 
@@ -32,9 +32,8 @@ class ToppingPickerActivity : AppCompatActivity() {
     private fun setupView() {
         back_button.setOnClickListener { finish() }
         next_button.setOnClickListener {
-            val intent = Intent(this, ProgressActivity::class.java)
-            intent.putExtra(MainActivity.PIZZA_KEY, pizza)
-            startActivityForResult(intent, REQUEST_CODE)
+            val paymentFragment = PaymentBottomSheetFragment.newInstance(pizza)
+            paymentFragment.show(supportFragmentManager, getString(R.string.order_fragment))
         }
     }
 
@@ -47,6 +46,12 @@ class ToppingPickerActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK)
             finish()
+    }
+
+    override fun onPaymentComplete(pizza: Pizza) {
+        val intent = Intent(this@ToppingPickerActivity, ProgressActivity::class.java)
+        intent.putExtra(MainActivity.PIZZA_KEY, pizza)
+        startActivity(intent)
     }
 
     companion object {

@@ -15,4 +15,12 @@
     <string name="finish">Finish</string>
     <string name="making_pizza">Making your delicious pizza…</string>
     <string name="your_pizza_is_ready">Your pizza is ready!</string>
+
+    <string name="summary">Summary</string>
+    <string name="credit_card_label">Payment</string>
+    <string name="credit_card_no">Ending in 4827</string>
+
+    <string name="order_label">Order summary</string>
+    <string name="pizza_quantity">%s x1</string>
+    <string name="order_fragment">order_fragment</string>
 </resources>

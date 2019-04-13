@@ -21,7 +21,7 @@ import com.camerash.incubator.model.Pizza
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_pizza.view.*
 
-class MainActivity : AppCompatActivity(), ServiceConnection {
+class MainActivity : AppCompatActivity(), ServiceConnection, PaymentBottomSheetFragment.OnPaymentCompleteListener {
 
     @Suppress("DEPRECATION")
     private val progressDialog: ProgressDialog by lazy {
@@ -129,6 +129,12 @@ class MainActivity : AppCompatActivity(), ServiceConnection {
         }
     }
 
+    override fun onPaymentComplete(pizza: Pizza) {
+        val intent = Intent(this@MainActivity, ProgressActivity::class.java)
+        intent.putExtra(PIZZA_KEY, pizza)
+        startActivity(intent)
+    }
+
     companion object {
         val pizzaList = listOf(
             Pizza(
@@ -177,9 +183,8 @@ class MainActivity : AppCompatActivity(), ServiceConnection {
 
                 itemView.order_button.setOnClickListener {
                     // Directly go to order page
-                    val intent = Intent(this@MainActivity, ProgressActivity::class.java)
-                    intent.putExtra(PIZZA_KEY, pizza)
-                    startActivity(intent)
+                    val paymentFragment = PaymentBottomSheetFragment.newInstance(pizza)
+                    paymentFragment.show(supportFragmentManager, getString(R.string.order_fragment))
                 }
 
                 itemView.customize_button.setOnClickListener {
