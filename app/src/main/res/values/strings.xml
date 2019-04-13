@@ -2,4 +2,6 @@
     <string name="app_name">Incubator</string>
 
     <string name="bluetooth_connection">Connect to incubator</string>
+    <string name="back">&lt; Back</string>
+    <string name="next">Next &gt;</string>
 </resources>
