@@ -82,10 +82,10 @@ class ToppingPickerActivity : AppCompatActivity() {
                         R.color.green_pepper
                 ),
                 Topping(
-                        "Yellow Pepper",
+                        "Pineapple",
                         20,
                         10,
-                        R.color.yellow_pepper
+                        R.color.pineapple
                 )
         )
 

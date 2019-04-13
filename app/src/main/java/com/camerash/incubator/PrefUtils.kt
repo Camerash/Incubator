@@ -4,6 +4,7 @@ import android.bluetooth.BluetoothDevice
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 
 /**
@@ -22,7 +23,8 @@ object PrefUtils {
     fun getDefaultBtDevice(context: Context): BluetoothDevice? {
         val device = context.getSharedPreferences(PREF_NAME, MODE_PRIVATE).getString(KEY, null)
         device ?: return null
-        return Gson().fromJson(device, BluetoothDevice::class.java)
+        return Gson().fromJson(device)
     }
 
+    private inline fun <reified T> Gson.fromJson(json: String) = this.fromJson<T>(json, object: TypeToken<T>() {}.type)
 }

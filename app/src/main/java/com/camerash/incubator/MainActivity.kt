@@ -8,6 +8,7 @@ import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.Handler
 import android.os.IBinder
+import android.os.Message
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
@@ -15,22 +16,23 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.*
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.camerash.incubator.model.Pizza
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_pizza.view.*
 
 class MainActivity : AppCompatActivity(), ServiceConnection {
 
-    private var service: BluetoothService? = null
     private val progressDialog: ProgressDialog by lazy {
         val dialog = ProgressDialog(this)
-        dialog.setTitle(R.string.loading)
+        dialog.setMessage(getString(R.string.loading))
         dialog
     }
 
     private val handler = Handler {
         when (it.what) {
             Bluetooth.MESSAGE_STATE_CHANGE -> checkState()
+            Bluetooth.MESSAGE_TOAST -> checkToast(it)
             else -> {}
         }
         true
@@ -66,20 +68,21 @@ class MainActivity : AppCompatActivity(), ServiceConnection {
 
     override fun onServiceConnected(componentName: ComponentName, binder: IBinder) {
         if (binder is BluetoothService.BluetoothBinder) {
-            this.service = binder.getService()
-            this.service?.registerHandler(this.handler)
+            service = binder.getService()
+            service?.registerHandler(this.handler)
             val device = PrefUtils.getDefaultBtDevice(this)
-            if(device == null) {
-                getBluetoothDeviceList()
-            } else {
-                this.service?.connect(device)
-                progressDialog.show()
-            }
+            getBluetoothDeviceList()
+//            if(device == null) {
+//                getBluetoothDeviceList()
+//            } else {
+//                this.service?.connect(device)
+//                progressDialog.show()
+//            }
         }
     }
 
     override fun onServiceDisconnected(componentName: ComponentName) {
-        this.service = null
+        service = null
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -91,7 +94,7 @@ class MainActivity : AppCompatActivity(), ServiceConnection {
 
     private fun getBluetoothDeviceList() {
         progressDialog.show()
-        this.service?.initializeBluetooth {
+        service?.initializeBluetooth {
             val list = it.toList()
             val deviceNameList = list.map { device -> device.name }
             progressDialog.dismiss()
@@ -100,7 +103,7 @@ class MainActivity : AppCompatActivity(), ServiceConnection {
             dialog.setAdapter(ArrayAdapter(this, android.R.layout.simple_list_item_single_choice, deviceNameList)) { dialog, pos ->
                 val device = list[pos]
                 PrefUtils.saveDefaultBtDevice(this, device)
-                this.service?.connect(device)
+                service?.connect(device)
                 progressDialog.show()
             }
             dialog.show()
@@ -108,23 +111,18 @@ class MainActivity : AppCompatActivity(), ServiceConnection {
     }
 
     private fun checkState() {
-        if(this.service?.isConnected() == true) {
+        if(service?.isConnected() == true) {
             progressDialog.dismiss()
             mask.visibility = View.GONE
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        if(service != null) return
-        val intent = Intent(this, BluetoothService::class.java)
-        bindService(intent, this, Context.BIND_AUTO_CREATE)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        service ?: return
-        unbindService(this)
+    private fun checkToast(message: Message) {
+        val msg = message.data.getString("Toast")
+        if(msg == "Unable to connect device") {
+            progressDialog.dismiss()
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+        }
     }
 
     companion object {
@@ -151,6 +149,7 @@ class MainActivity : AppCompatActivity(), ServiceConnection {
         )
 
         val PIZZA_KEY = "Pizza"
+        var service: BluetoothService? = null
     }
 
     inner class PizzaAdapter(private val pizzaList: List<Pizza>) :
