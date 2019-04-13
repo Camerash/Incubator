@@ -8,7 +8,11 @@ import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.Handler
 import android.os.IBinder
+import android.support.constraint.ConstraintSet
+import android.support.transition.AutoTransition
+import android.support.transition.TransitionManager
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import com.camerash.incubator.model.Pizza
 import kotlinx.android.synthetic.main.activity_progress.*
 
@@ -85,5 +89,11 @@ class ProgressActivity : AppCompatActivity(), ServiceConnection{
         // Pizza finished
         animator.pause()
         message_text_view.setText(R.string.your_pizza_is_ready)
+
+        TransitionManager.beginDelayedTransition(root, AutoTransition())
+        val set = ConstraintSet()
+        set.clone(root)
+        set.setVisibility(finish_button.id, View.VISIBLE)
+        set.applyTo(root)
     }
 }
