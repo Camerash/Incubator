@@ -46,7 +46,7 @@ class ToppingPickerActivity : AppCompatActivity(), PaymentBottomSheetFragment.On
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK)
+        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK)
             finish()
     }
 
@@ -63,47 +63,49 @@ class ToppingPickerActivity : AppCompatActivity(), PaymentBottomSheetFragment.On
     }
 
     companion object {
-        val toppingList = listOf(
-                Topping(
-                        "Tomato sause",
-                        2,
-                        1,
-                        R.color.tomato_sauce
-                ),
-                Topping(
-                        "Pineapple",
-                        2,
-                        1,
-                        R.color.pineapple
-                ),
-                Topping(
-                        "Pepperoni",
-                        2,
-                        1,
-                        R.color.pepperoni
-                ),
-                Topping(
-                        "Red Pepper",
-                        2,
-                        1,
-                        R.color.red_pepper
-                ),
-                Topping(
-                        "Green Pepper",
-                        2,
-                        1,
-                        R.color.green_pepper
-                ),
-                Topping(
-                        "Cheese",
-                        2,
-                        1,
-                        R.color.cheese
-                )
-        )
-
+        const val MAX_AMOUNT = 2
+        const val DEFAULT_AMOUNT = 1
         const val REQUEST_CODE = 1
         const val TOPPING_KEY = "TOPPING"
+
+        val toppingList = listOf(
+            Topping(
+                "Tomato sause",
+                MAX_AMOUNT,
+                DEFAULT_AMOUNT,
+                R.color.tomato_sauce
+            ),
+            Topping(
+                "Pineapple",
+                MAX_AMOUNT,
+                DEFAULT_AMOUNT,
+                R.color.pineapple
+            ),
+            Topping(
+                "Pepperoni",
+                MAX_AMOUNT,
+                DEFAULT_AMOUNT,
+                R.color.pepperoni
+            ),
+            Topping(
+                "Red Pepper",
+                MAX_AMOUNT,
+                DEFAULT_AMOUNT,
+                R.color.red_pepper
+            ),
+            Topping(
+                "Green Pepper",
+                MAX_AMOUNT,
+                DEFAULT_AMOUNT,
+                R.color.green_pepper
+            ),
+            Topping(
+                "Cheese",
+                MAX_AMOUNT,
+                DEFAULT_AMOUNT,
+                R.color.cheese
+            )
+        )
     }
 
     inner class ToppingAdapter(private val toppingList: List<Topping>) :
@@ -128,7 +130,7 @@ class ToppingPickerActivity : AppCompatActivity(), PaymentBottomSheetFragment.On
                 itemView.seekbar.setProgressColor(ContextCompat.getColor(itemView.context, topping.color))
                 itemView.seekbar.value = topping.defaultAmount
 
-                itemView.seekbar.setOnBoxedPointsChangeListener(object: BoxedVertical.OnValuesChangeListener {
+                itemView.seekbar.setOnBoxedPointsChangeListener(object : BoxedVertical.OnValuesChangeListener {
                     override fun onPointsChanged(view: BoxedVertical, value: Int) {
                         toppingValueList.find { it.name == topping.name }?.value = value
                     }
