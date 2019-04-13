@@ -22,4 +22,5 @@
     <color name="translucent_text_gray">#AA444444</color>
 
     <color name="pay_red">#D14343</color>
+    <color name="payment_background_gray">#EEEEEE</color>
 </resources>
