@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.animation.LinearInterpolator
 import com.camerash.incubator.model.Pizza
+import com.camerash.incubator.model.ToppingPayload
 import kotlinx.android.synthetic.main.activity_progress.*
 
 class ProgressActivity : AppCompatActivity() {
@@ -25,6 +26,13 @@ class ProgressActivity : AppCompatActivity() {
     }
     private var made = false
     private val pizza: Pizza by lazy { intent.getSerializableExtra(MainActivity.PIZZA_KEY) as Pizza }
+    private val toppingPayload: ToppingPayload? by lazy {
+        if(intent.hasExtra(ToppingPickerActivity.TOPPING_KEY)) {
+            intent.getSerializableExtra(ToppingPickerActivity.TOPPING_KEY) as ToppingPayload
+        } else {
+            null
+        }
+    }
 
     private val animator = ValueAnimator.ofFloat(0f, 360f)
 
@@ -71,7 +79,8 @@ class ProgressActivity : AppCompatActivity() {
     private fun makePizza() {
         if(made) return
         made = true
-        MainActivity.service?.sendString("1, 180, 1")
+        val message = toppingPayload?.list?.joinToString(",") ?: "1, 1, 1, 1"
+        MainActivity.service?.sendString(message)
 
         if(MainActivity.debugMode) {
             Handler().postDelayed({

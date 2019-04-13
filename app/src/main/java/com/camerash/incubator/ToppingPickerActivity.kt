@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.camerash.incubator.model.Pizza
 import com.camerash.incubator.model.Topping
+import com.camerash.incubator.model.ToppingPayload
 import com.camerash.incubator.model.ToppingValue
 import com.camerash.incubator.view.BoxedVertical
 import kotlinx.android.synthetic.main.activity_topping_picker.*
@@ -21,6 +22,7 @@ import kotlinx.android.synthetic.main.item_topping.view.*
 class ToppingPickerActivity : AppCompatActivity(), PaymentBottomSheetFragment.OnPaymentCompleteListener {
 
     private val pizza: Pizza by lazy { intent.getSerializableExtra(MainActivity.PIZZA_KEY) as Pizza }
+    private val adapter = ToppingAdapter(toppingList)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +41,7 @@ class ToppingPickerActivity : AppCompatActivity(), PaymentBottomSheetFragment.On
 
     private fun setupRecyclerView() {
         topping_recycler_view.layoutManager = GridLayoutManager(this, 3)
-        topping_recycler_view.adapter = ToppingAdapter(toppingList)
+        topping_recycler_view.adapter = adapter
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -49,8 +51,14 @@ class ToppingPickerActivity : AppCompatActivity(), PaymentBottomSheetFragment.On
     }
 
     override fun onPaymentComplete(pizza: Pizza) {
+        val toppingValueList = adapter.toppingValueList.map { it.value }.toMutableList()
+        toppingValueList.removeAt(3) // Remove Red Pepper
+        toppingValueList.removeAt(3) // Remove Green Pepper
+        val toppingPayload = ToppingPayload(toppingValueList)
+
         val intent = Intent(this@ToppingPickerActivity, ProgressActivity::class.java)
         intent.putExtra(MainActivity.PIZZA_KEY, pizza)
+        intent.putExtra(TOPPING_KEY, toppingPayload)
         startActivityForResult(intent, REQUEST_CODE)
     }
 
@@ -58,43 +66,44 @@ class ToppingPickerActivity : AppCompatActivity(), PaymentBottomSheetFragment.On
         val toppingList = listOf(
                 Topping(
                         "Tomato sause",
-                        20,
-                        10,
+                        2,
+                        1,
                         R.color.tomato_sauce
                 ),
                 Topping(
                         "Pineapple",
-                        20,
-                        10,
+                        2,
+                        1,
                         R.color.pineapple
                 ),
                 Topping(
                         "Pepperoni",
-                        20,
-                        10,
+                        2,
+                        1,
                         R.color.pepperoni
                 ),
                 Topping(
                         "Red Pepper",
-                        20,
-                        10,
+                        2,
+                        1,
                         R.color.red_pepper
                 ),
                 Topping(
                         "Green Pepper",
-                        20,
-                        10,
+                        2,
+                        1,
                         R.color.green_pepper
                 ),
                 Topping(
                         "Cheese",
-                        20,
-                        10,
+                        2,
+                        1,
                         R.color.cheese
                 )
         )
 
         const val REQUEST_CODE = 1
+        const val TOPPING_KEY = "TOPPING"
     }
 
     inner class ToppingAdapter(private val toppingList: List<Topping>) :
