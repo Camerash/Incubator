@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity(), ServiceConnection {
     private val progressDialog: ProgressDialog by lazy {
         val dialog = ProgressDialog(this)
         dialog.setMessage(getString(R.string.connecting))
+        dialog.setCancelable(false)
         dialog
     }
 
@@ -94,6 +95,7 @@ class MainActivity : AppCompatActivity(), ServiceConnection {
     }
 
     private fun getBluetoothDeviceList() {
+        progressDialog.setMessage(getString(R.string.turning_on_bluetooth))
         progressDialog.show()
         service?.initializeBluetooth {
             val list = it.toList()
@@ -105,6 +107,7 @@ class MainActivity : AppCompatActivity(), ServiceConnection {
                 val device = list[pos]
                 PrefUtils.saveDefaultBtDevice(this, device)
                 service?.connect(device)
+                progressDialog.setMessage(getString(R.string.connecting))
                 progressDialog.show()
             }
             dialog.show()

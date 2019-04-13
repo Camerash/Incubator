@@ -9,6 +9,7 @@
     <string name="order">Order</string>
     <string name="customize">Customize</string>
     <string name="connecting">Connecting…</string>
+    <string name="turning_on_bluetooth">Turning on bluetooth…</string>
     <string name="select_bt_device">Select bluetooth device</string>
 
     <string name="finish">Finish</string>

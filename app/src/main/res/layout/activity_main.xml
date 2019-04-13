@@ -19,7 +19,8 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_scrollFlags="scroll|enterAlways" />
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:titleTextColor="@android:color/white"/>
 
         </android.support.design.widget.AppBarLayout>
 
@@ -85,6 +86,7 @@
         android:id="@+id/mask"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
         android:background="@color/translucent_gray"
         android:clickable="true"
         android:focusable="true"

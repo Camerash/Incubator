@@ -20,9 +20,16 @@ class BluetoothService: Service() {
 
     fun initializeBluetooth(callback: (Set<BluetoothDevice>) -> Unit) {
         val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
-        if(!bluetoothAdapter.isEnabled) bluetoothAdapter.enable()
-        bt.start()
-        callback(bt.pairedDevices)
+        if(!bluetoothAdapter.isEnabled) {
+            bluetoothAdapter.enable()
+            Handler().postDelayed({
+                bt.start()
+                callback(bt.pairedDevices)
+            }, 1000)
+        } else {
+            bt.start()
+            callback(bt.pairedDevices)
+        }
     }
 
     fun connect(device: BluetoothDevice) {
