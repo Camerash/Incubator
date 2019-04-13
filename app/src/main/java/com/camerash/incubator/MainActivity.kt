@@ -8,7 +8,6 @@ import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.Handler
 import android.os.IBinder
-import android.os.Message
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
@@ -34,7 +33,6 @@ class MainActivity : AppCompatActivity(), ServiceConnection, PaymentBottomSheetF
     private val handler = Handler {
         when (it.what) {
             Bluetooth.MESSAGE_STATE_CHANGE -> checkState()
-            Bluetooth.MESSAGE_TOAST -> checkToast(it)
             else -> {}
         }
         true
@@ -79,8 +77,14 @@ class MainActivity : AppCompatActivity(), ServiceConnection, PaymentBottomSheetF
             } else {
                 service?.connect(device)
                 progressDialog.show()
+                Handler().postDelayed({ if(service?.isConnected() == false) handleConnectionFailed() }, 5000)
             }
         }
+    }
+
+    private fun handleConnectionFailed() {
+        progressDialog.dismiss()
+        Toast.makeText(this, R.string.connection_failed, Toast.LENGTH_SHORT).show()
     }
 
     override fun onServiceDisconnected(componentName: ComponentName) {
@@ -109,6 +113,7 @@ class MainActivity : AppCompatActivity(), ServiceConnection, PaymentBottomSheetF
                 service?.connect(device)
                 progressDialog.setMessage(getString(R.string.connecting))
                 progressDialog.show()
+                Handler().postDelayed({ if(service?.isConnected() == false) handleConnectionFailed() }, 5000)
             }
             dialog.show()
         }
@@ -118,14 +123,6 @@ class MainActivity : AppCompatActivity(), ServiceConnection, PaymentBottomSheetF
         if(service?.isConnected() == true) {
             progressDialog.dismiss()
             mask.visibility = View.GONE
-        }
-    }
-
-    private fun checkToast(message: Message) {
-        val msg = message.data.getString("Toast")
-        if(msg == "Unable to connect device") {
-            progressDialog.dismiss()
-            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
         }
     }
 

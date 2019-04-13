@@ -30,6 +30,7 @@ class PaymentBottomSheetFragment: BottomSheetDialogFragment() {
         pizza_image.setImageResource(pizza.drawableRes)
         pizza_info.text = getString(R.string.pizza_quantity, pizza.name)
         order_button.setOnClickListener {
+            dismiss()
             val act = activity ?: return@setOnClickListener
             if(act is OnPaymentCompleteListener)
                 act.onPaymentComplete(pizza)

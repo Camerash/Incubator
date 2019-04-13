@@ -51,7 +51,7 @@ class ToppingPickerActivity : AppCompatActivity(), PaymentBottomSheetFragment.On
     override fun onPaymentComplete(pizza: Pizza) {
         val intent = Intent(this@ToppingPickerActivity, ProgressActivity::class.java)
         intent.putExtra(MainActivity.PIZZA_KEY, pizza)
-        startActivity(intent)
+        startActivityForResult(intent, REQUEST_CODE)
     }
 
     companion object {

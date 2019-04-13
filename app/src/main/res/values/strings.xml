@@ -23,4 +23,5 @@
     <string name="order_label">Order summary</string>
     <string name="pizza_quantity">%s x1</string>
     <string name="order_fragment">order_fragment</string>
+    <string name="connection_failed">Unable to connect device</string>
 </resources>
