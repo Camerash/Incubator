@@ -71,7 +71,6 @@ class MainActivity : AppCompatActivity(), ServiceConnection {
             service = binder.getService()
             service?.registerHandler(this.handler)
             val device = PrefUtils.getDefaultBtDevice(this)
-            getBluetoothDeviceList()
             if(device == null) {
                 getBluetoothDeviceList()
             } else {
