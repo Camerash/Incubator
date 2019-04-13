@@ -5,6 +5,7 @@
     <string name="back">&lt; Back</string>
     <string name="next">Next &gt;</string>
 
+    <string name="welcome_message">Welcome, Reuben</string>
     <string name="order">Order</string>
     <string name="customize">Customize</string>
 </resources>

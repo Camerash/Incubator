@@ -21,12 +21,20 @@ class ToppingPickerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_topping_picker)
+        setupView()
         setupRecyclerView()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return super.onCreateOptionsMenu(menu)
+    }
+
+    private fun setupView() {
+        back_button.setOnClickListener { finish() }
+        next_button.setOnClickListener {
+            //TODO
+        }
     }
 
     private fun setupRecyclerView() {
