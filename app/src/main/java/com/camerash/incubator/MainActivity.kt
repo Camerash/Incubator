@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.item_pizza.view.*
 
 class MainActivity : AppCompatActivity(), ServiceConnection {
 
+    @Suppress("DEPRECATION")
     private val progressDialog: ProgressDialog by lazy {
         val dialog = ProgressDialog(this)
         dialog.setMessage(getString(R.string.connecting))
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity(), ServiceConnection {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setSupportActionBar(toolbar)
         setupView()
         setupRecyclerView()
         startBluetoothService()
@@ -172,6 +174,9 @@ class MainActivity : AppCompatActivity(), ServiceConnection {
 
                 itemView.order_button.setOnClickListener {
                     // Directly go to order page
+                    val intent = Intent(this@MainActivity, ProgressActivity::class.java)
+                    intent.putExtra(PIZZA_KEY, pizza)
+                    startActivity(intent)
                 }
 
                 itemView.customize_button.setOnClickListener {
