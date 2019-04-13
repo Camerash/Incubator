@@ -17,4 +17,5 @@
     <color name="tomato_sauce">#DD1111</color>
 
     <color name="translucent_red">#66CC0000</color>
+    <color name="translucent_gray">#AA000000</color>
 </resources>

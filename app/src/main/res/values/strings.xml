@@ -8,4 +8,5 @@
     <string name="welcome_message">Welcome, Reuben</string>
     <string name="order">Order</string>
     <string name="customize">Customize</string>
+    <string name="loading">Loading…</string>
 </resources>

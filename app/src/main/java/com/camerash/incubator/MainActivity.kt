@@ -1,25 +1,52 @@
 package com.camerash.incubator
 
+import android.app.ProgressDialog
+import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
+import android.content.ServiceConnection
 import android.os.Bundle
+import android.os.Handler
+import android.os.IBinder
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.ArrayAdapter
 import com.camerash.incubator.model.Pizza
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_pizza.view.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ServiceConnection {
+
+    private var service: BluetoothService? = null
+    private val progressDialog: ProgressDialog by lazy {
+        val dialog = ProgressDialog(this)
+        dialog.setTitle(R.string.loading)
+        dialog
+    }
+
+    private val handler = Handler {
+        when (it.what) {
+            Bluetooth.MESSAGE_STATE_CHANGE -> checkState()
+            else -> {}
+        }
+        true
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupView()
         setupRecyclerView()
+        startBluetoothService()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
     private fun setupView() {
@@ -30,6 +57,63 @@ class MainActivity : AppCompatActivity() {
         pizza_recycler_view.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         pizza_recycler_view.layoutManager = LinearLayoutManager(this)
         pizza_recycler_view.adapter = PizzaAdapter(pizzaList)
+    }
+
+    private fun startBluetoothService() {
+        val intent = Intent(this, BluetoothService::class.java)
+        bindService(intent, this, Context.BIND_AUTO_CREATE)
+    }
+
+    override fun onServiceConnected(componentName: ComponentName, binder: IBinder) {
+        if (binder is BluetoothService.BluetoothBinder) {
+            this.service = binder.getService()
+            this.service?.registerHandler(this.handler)
+        }
+    }
+
+    override fun onServiceDisconnected(componentName: ComponentName) {
+        this.service = null
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.bluetooth -> getBluetoothDeviceList()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun getBluetoothDeviceList() {
+        progressDialog.show()
+        this.service?.initializeBluetooth {
+            val list = it.toList()
+            val deviceNameList = list.map { device -> device.name }
+            progressDialog.dismiss()
+            val dialog = AlertDialog.Builder(this)
+            dialog.setAdapter(ArrayAdapter(this, android.R.layout.simple_list_item_single_choice, deviceNameList)) { dialog, pos ->
+                this.service?.connect(list[pos])
+                progressDialog.show()
+            }
+        }
+    }
+
+    private fun checkState() {
+        if(this.service?.isConnected() == true) {
+            progressDialog.dismiss()
+            mask.visibility = View.GONE
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(service != null) return
+        val intent = Intent(this, BluetoothService::class.java)
+        bindService(intent, this, Context.BIND_AUTO_CREATE)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        service ?: return
+        unbindService(this)
     }
 
     companion object {
