@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity(), ServiceConnection {
 
     private val progressDialog: ProgressDialog by lazy {
         val dialog = ProgressDialog(this)
-        dialog.setMessage(getString(R.string.loading))
+        dialog.setMessage(getString(R.string.connecting))
         dialog
     }
 
