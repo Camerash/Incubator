@@ -72,12 +72,12 @@ class MainActivity : AppCompatActivity(), ServiceConnection {
             service?.registerHandler(this.handler)
             val device = PrefUtils.getDefaultBtDevice(this)
             getBluetoothDeviceList()
-//            if(device == null) {
-//                getBluetoothDeviceList()
-//            } else {
-//                this.service?.connect(device)
-//                progressDialog.show()
-//            }
+            if(device == null) {
+                getBluetoothDeviceList()
+            } else {
+                service?.connect(device)
+                progressDialog.show()
+            }
         }
     }
 
