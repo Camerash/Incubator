@@ -1,14 +1,16 @@
 package com.camerash.incubator
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import com.camerash.incubator.model.Pizza
 import com.camerash.incubator.model.Topping
 import com.camerash.incubator.model.ToppingValue
 import com.camerash.incubator.view.BoxedVertical
@@ -17,6 +19,8 @@ import kotlinx.android.synthetic.main.item_topping.view.*
 
 
 class ToppingPickerActivity : AppCompatActivity() {
+
+    private val pizza: Pizza by lazy { intent.getSerializableExtra(MainActivity.PIZZA_KEY) as Pizza }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,13 +32,21 @@ class ToppingPickerActivity : AppCompatActivity() {
     private fun setupView() {
         back_button.setOnClickListener { finish() }
         next_button.setOnClickListener {
-            //TODO
+            val intent = Intent(this, ProgressActivity::class.java)
+            intent.putExtra(MainActivity.PIZZA_KEY, pizza)
+            startActivityForResult(intent, REQUEST_CODE)
         }
     }
 
     private fun setupRecyclerView() {
         topping_recycler_view.layoutManager = GridLayoutManager(this, 3)
         topping_recycler_view.adapter = ToppingAdapter(toppingList)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK)
+            finish()
     }
 
     companion object {
@@ -76,6 +88,8 @@ class ToppingPickerActivity : AppCompatActivity() {
                         R.color.yellow_pepper
                 )
         )
+
+        const val REQUEST_CODE = 1
     }
 
     inner class ToppingAdapter(private val toppingList: List<Topping>) :

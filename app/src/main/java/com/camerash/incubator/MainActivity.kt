@@ -68,6 +68,13 @@ class MainActivity : AppCompatActivity(), ServiceConnection {
         if (binder is BluetoothService.BluetoothBinder) {
             this.service = binder.getService()
             this.service?.registerHandler(this.handler)
+            val device = PrefUtils.getDefaultBtDevice(this)
+            if(device == null) {
+                getBluetoothDeviceList()
+            } else {
+                this.service?.connect(device)
+                progressDialog.show()
+            }
         }
     }
 
@@ -89,10 +96,14 @@ class MainActivity : AppCompatActivity(), ServiceConnection {
             val deviceNameList = list.map { device -> device.name }
             progressDialog.dismiss()
             val dialog = AlertDialog.Builder(this)
+            dialog.setTitle(R.string.select_bt_device)
             dialog.setAdapter(ArrayAdapter(this, android.R.layout.simple_list_item_single_choice, deviceNameList)) { dialog, pos ->
-                this.service?.connect(list[pos])
+                val device = list[pos]
+                PrefUtils.saveDefaultBtDevice(this, device)
+                this.service?.connect(device)
                 progressDialog.show()
             }
+            dialog.show()
         }
     }
 
@@ -138,6 +149,8 @@ class MainActivity : AppCompatActivity(), ServiceConnection {
                 R.drawable.pizza_ham_and_cheese
             )
         )
+
+        val PIZZA_KEY = "Pizza"
     }
 
     inner class PizzaAdapter(private val pizzaList: List<Pizza>) :
@@ -165,7 +178,9 @@ class MainActivity : AppCompatActivity(), ServiceConnection {
 
                 itemView.customize_button.setOnClickListener {
                     // Go to topping slider page
-                    startActivity(Intent(this@MainActivity, ToppingPickerActivity::class.java))
+                    val intent = Intent(this@MainActivity, ToppingPickerActivity::class.java)
+                    intent.putExtra(PIZZA_KEY, pizza)
+                    startActivity(intent)
                 }
             }
         }
